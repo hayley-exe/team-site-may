@@ -1,0 +1,27 @@
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.badgeImgs {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+.card {
+  position: relative;
+  padding-bottom: 60px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Ensure full viewport height */
+  background-image: url("imgs/sword.webp"); /* Your background image URL */
+  background-size: cover; /* Ensure the image covers the whole screen */
+  background-position: center; /* Center the image */
+  background-attachment: fixed; /* Keep the background fixed during scroll */
+  background-repeat: no-repeat; /* Ensure the image doesn't repeat */
+  align-items: center;
+}

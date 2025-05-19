@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h5 class="card-title mb-1">${p.firstName} ${p.lastName}</h5>
                          <p class="small text-muted mb-0">Heritage: ${p.heritage}</p>
                         <p class="small text-muted mb-0">Series: ${p.series}</p>
-                         <div class="d-flex justify-content-center flex-wrap mt-2">
+                         <div class="d-flex justify-content-center flex-wrap mt-2 badgeImgs">
                             ${badgeImgs}
                         </div>
                     </div>
