@@ -1,27 +1,139 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-image: url("imgs/bg.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 h2 {
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
-}
-.badgeImgs {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  height: auto;
 }
+
 .card {
   position: relative;
-  padding-bottom: 60px;
+  perspective: 1500px; /* Strong 3D effect */
+  height: 500px; /* Fixed height to fit all content */
+  width: 200px; /* Fixed width for uniformity */
+  background: transparent; /* No background for card container */
+  border: none !important;
+  border-radius: 15px; /* Rounded corners for the card */
+  overflow: hidden; /* Ensures child elements respect the rounded corners */
 }
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh; /* Ensure full viewport height */
-  background-image: url("imgs/sword.webp"); /* Your background image URL */
-  background-size: cover; /* Ensure the image covers the whole screen */
-  background-position: center; /* Center the image */
-  background-attachment: fixed; /* Keep the background fixed during scroll */
-  background-repeat: no-repeat; /* Ensure the image doesn't repeat */
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease-in-out; /* Smooth 3D flip */
+  transform-style: preserve-3d;
+  transform-origin: center;
+  border: none !important;
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 15px; /* Ensure front and back respect rounded corners */
+}
+
+.card-front {
+  background: #ffffff; /* White background for front */
+  z-index: 2;
+}
+
+.card-back {
+  background: #ffffff;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+
+.card-img-top {
+  width: 100%; /* Spans full width of the card (200px) */
+  height: 250px; /* Fixed height for the image area */
+  object-fit: contain; /* Ensures full image visibility without cropping */
+  object-position: center; /* Centers the image */
+  display: block; /* Ensures proper rendering */
+  margin-top: 10px;
+  border-radius: 20px !important;
+}
+
+.badgeImgs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.badgeImgs img {
+  width: 50px; /* Smaller badges to fit */
+  height: 50px;
+}
+
+.card-body {
+  padding: 10px;
+  height: calc(100% - 250px); /* Adjust for image height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px; /* Space between elements */
+  border: none !important;
+}
+
+.card-back .card-body {
+  height: 100%; /* Full height for back */
+  justify-content: flex-end; /* Align content to bottom */
+  padding-bottom: 60px; /* Space for textarea and button */
+}
+
+.card-back textarea {
+  width: 90%;
+  height: calc(100% - 80px); /* Adjust to fit above button */
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent for readability */
+}
+
+.btn-flip {
+  margin-top: 5px; /* Space above button */
+}
+
+.roster-container {
+  max-width: 1400px;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.row {
+  margin-bottom: 15px; /* Spacing for 6 rows */
+  display: flex;
+  justify-content: center;
+}
+
+.col-2 {
+  margin-bottom: 15px; /* Spacing for 6 rows */
+  padding: 0 5px; /* Tighter padding for 6 columns */
 }

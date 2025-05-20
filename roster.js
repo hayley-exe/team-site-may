@@ -1,35 +1,60 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     const grid = document.getElementById('rosterGrid');
 
     const render = list => {
         grid.innerHTML = '';
+        // Split into 6 rows of 6 cards each
+        for (let i = 0; i < list.length; i += 6) {
+            const row = document.createElement('div');
+            row.className = 'row';
+            const rowPlayers = list.slice(i, i + 6);
+            rowPlayers.forEach(p => {
+                const col = document.createElement('div');
+                col.className = 'col-2';
 
-        list.forEach(p => {
-            const col = document.createElement('div');
-            col.className = 'col-6 col-lg-2';
+                const badgeImgs = (p.badges || [])
+                    .map(b => `<img src="${b}" class="img-fluid" alt="badge">`)
+                    .join('');
 
-            const badgeImgs = (p.badges || [])
-                .map(b => `<img src="${b}" class="img-fluid me-1 mb-1" style="width:60px; height:60px; border:none;" alt="badge">`)
-                .join('');
-            col.innerHTML = `
-                <div class="card h-100 shadow-sm">
-                    <img src="${p.photo || 'https://via.placeholder.com/150'}" class="card-img-top" alt="${p.firstName} ${p.lastName}">
-                    <div class="card-body text-center">
-                        <h5 class="card-title mb-1">${p.firstName} ${p.lastName}</h5>
-                         <p class="small text-muted mb-0">Heritage: ${p.heritage}</p>
-                        <p class="small text-muted mb-0">Series: ${p.series}</p>
-                         <div class="d-flex justify-content-center flex-wrap mt-2 badgeImgs">
-                            ${badgeImgs}
-                        </div>
-                    </div>
-                </div>
-            `;
+                col.innerHTML = `
+                            <div class="card ">
+                                <div class="card-inner">
+                                    <!-- Front of the card -->
+                                    <div class="card-front">
+                                        <img src="${p.photo || 'https://via.placeholder.com/200x250'}" class="card-img-top" alt="${p.firstName} ${p.lastName}">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title mb-0">${p.firstName} ${p.lastName}</h5>
+                                            <p class="small text-muted mb-0">Heritage: ${p.heritage}</p>
+                                            <p class="small text-muted mb-0">Series: ${p.series}</p>
+                                            <div class="badgeImgs">${badgeImgs}</div>
+                                            <button class="btn btn-primary btn-sm btn-flip" onclick="flipCard(this)">Flip Card</button>
+                                        </div>
+                                    </div>
+                                    <!-- Back of the card -->
+                                    <div class="card-back">
+                                        <div class="card-body text-center">
+                                            <textarea placeholder="Enter additional info (e.g., Stats, Bio)"></textarea>
+                                            <button class="btn btn-primary btn-sm btn-flip" onclick="flipCard(this)">Flip Back</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
 
-            grid.appendChild(col);
-        });
+                row.appendChild(col);
+            });
+            grid.appendChild(row);
+        }
     };
 
-    render(players); // Ensure `players` is defined before this runs
-
+    render(players);
 });
+
+function flipCard(button) {
+    const cardInner = button.closest('.card-inner');
+    cardInner.classList.add('flipping');
+    cardInner.style.transform = cardInner.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+    setTimeout(() => {
+        cardInner.classList.remove('flipping');
+    }, 800); // Match transition duration
+}
